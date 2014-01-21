@@ -9,18 +9,21 @@ int main()
 {
     cv::VideoCapture stream1(0);
 
-    if (!stream1.isOpened())
-        std::cout << "cannot open camera" << std::endl;
-
-    while (true)
+    if (stream1.isOpened())
     {
         cv::Mat cameraFrame;
-        stream1.read(cameraFrame);
-        imshow("cam", cameraFrame);
 
-        if (cv::waitKey(30) >= 0)
-            break;
+        while (true)
+        {
+            stream1.read(cameraFrame);
+            imshow("cam", cameraFrame);
+
+            if (cv::waitKey(30) >= 0)
+                break;
+        }
     }
+    else
+        std::cout << "cannot open camera" << std::endl;
 
     return 0;
 }
